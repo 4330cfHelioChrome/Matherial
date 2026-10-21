@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-color: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent-color: #38bdf8;
-    --border-color: #334155;
+    --bg-color: #000000;
+    --card-bg: #111111;
+    --text-color: #ffffff;
+    --text-muted: #888888;
+    --accent-color: #ffffff;
+    --border-color: #333333;
 }
 
 * {
@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Courier New', Courier, monospace, 'Segoe UI', Tahoma, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -24,9 +24,9 @@ body {
 }
 
 header {
-    background-color: var(--card-bg);
+    background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,30 +35,34 @@ header {
 .logo {
     font-weight: bold;
     font-size: 1.25rem;
-    color: var(--accent-color);
+    color: var(--text-color);
     text-decoration: none;
+    letter-spacing: 2px;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 nav a {
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.2s;
+    font-size: 0.95rem;
 }
 
 nav a:hover, nav a.active {
-    color: var(--accent-color);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    padding-bottom: 2px;
 }
 
 main {
     flex: 1;
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 3rem auto;
     padding: 0 1.5rem;
     width: 100%;
 }
@@ -66,15 +70,17 @@ main {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--accent-color);
+    color: var(--text-color);
+    letter-spacing: -1px;
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
+    color: var(--text-color);
 }
 
 p {
@@ -85,7 +91,7 @@ p {
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
 }
@@ -95,19 +101,21 @@ table {
     border-collapse: collapse;
     margin-top: 1rem;
     background-color: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 th, td {
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
 
 th {
-    background-color: #334155;
+    background-color: #1a1a1a;
     color: var(--text-color);
+    font-weight: 600;
 }
 
 td {
@@ -116,9 +124,9 @@ td {
 
 footer {
     text-align: center;
-    padding: 1.5rem;
-    background-color: var(--card-bg);
+    padding: 2rem;
+    background-color: var(--bg-color);
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 0.85rem;
 }
