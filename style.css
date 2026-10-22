@@ -166,43 +166,6 @@ p {
     background-color: var(--accent-color);
 }
 
-/* Interactive Playground / Preview Box */
-.interactive-box {
-    background: #0d0d12;
-    border: 1px dashed var(--accent-color);
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.interactive-box input {
-    background: #000;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 0.75rem 1rem;
-    color: var(--text-color);
-    font-family: inherit;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color var(--transition-speed);
-}
-
-.interactive-box input:focus {
-    border-color: var(--accent-color);
-}
-
-.output-display {
-    padding: 1rem;
-    background: #050508;
-    border-radius: 4px;
-    color: var(--accent-color);
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
 /* Tables */
 table {
     width: 100%;
