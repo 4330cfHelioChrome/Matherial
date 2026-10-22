@@ -207,3 +207,51 @@ footer {
     color: var(--text-muted);
     font-size: 0.85rem;
 }
+
+/* Search & Filter Controls */
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.search-container input, 
+.search-container select {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-container input {
+    flex: 1;
+    min-width: 250px;
+}
+
+.search-container input:focus, 
+.search-container select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+}
+
+.loading-row td {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2.5rem;
+}
