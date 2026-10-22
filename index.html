@@ -10,7 +10,8 @@
 <body>
     <header>
         <a href="index.html" class="logo">
-            <img src="./images/favicon.png" alt="Matheriel" style="height: 32px; vertical-align: middle;">
+            <img src="./images/favicon.png" alt="Matheriel" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+            MATHERIEL
         </a>
         <nav>
             <ul>
@@ -20,10 +21,11 @@
                 <li><a href="translate.html">Translate</a></li>
             </ul>
         </nav>
-    </header>    
+    </header>
+    
     <main>
         <h1>Matheriel</h1>
-        <p>A constructed language built entirely from mathematical and logical symbols.</p>
+        <p class="subtitle">A constructed language built entirely from mathematical and logical symbols.</p>
 
         <div class="card">
             <h2>About the Project</h2>
@@ -34,10 +36,19 @@
             <h2>Core Philosophy</h2>
             <p>Instead of relying on spoken phonetics and cultural idioms, Matheriel relies on pure relations, quantities, and operational flows to convey thoughts, concepts, and states.</p>
         </div>
+
+        <div class="card">
+            <h2>⚡ Quick Symbol Preview</h2>
+            <p>Test how foundational mathematical operators translate into abstract logic constructs within Matheriel:</p>
+            <div class="interactive-box">
+                <input type="text" id="symbolInput" placeholder="Try typing: ∀, ∃, ⟹, ⊕, ∇" value="∀x (x ⟹ ∃y (y ⟡ x))">
+                <div class="output-display" id="symbolOutput">Logical Validation: Structure Verified [OK]</div>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; Matheriel Language Project Team. All rights reserved.</p>
+        <p>&copy; 2026 Matheriel Language Project Team. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
