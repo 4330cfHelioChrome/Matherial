@@ -10,7 +10,8 @@
 <body>
     <header>
         <a href="index.html" class="logo">
-            <img src="./images/favicon.png" alt="Matheriel" style="height: 32px; vertical-align: middle;">
+            <img src="./images/favicon.png" alt="Matheriel" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+            MATHERIEL
         </a>
         <nav>
             <ul>
@@ -24,8 +25,22 @@
 
     <main>
         <h1>Symbol Dictionary</h1>
-        <p>Browse the core vocabulary and mathematical operators used in Matheriel.</p>
+        <p>Browse and search the core vocabulary and mathematical operators used in Matheriel.</p>
 
+        <!-- Search & Filter Controls -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search vocabulary terms or symbols...">
+            <select id="searchType">
+                <option value="all">Search by: All Fields</option>
+                <option value="word">Search by: Symbol / Word</option>
+                <option value="definition">Search by: Meaning / Definition</option>
+            </select>
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
+            </select>
+        </div>
+
+        <!-- Dictionary Table -->
         <table>
             <thead>
                 <tr>
@@ -34,35 +49,20 @@
                     <th>Meaning</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>&infin;</td>
-                    <td>Noun / Concept</td>
-                    <td>Infinity, eternity, boundless state</td>
-                </tr>
-                <tr>
-                    <td>&empty;</td>
-                    <td>Noun / Concept</td>
-                    <td>Void, nothingness, absence</td>
-                </tr>
-                <tr>
-                    <td>&rarr;</td>
-                    <td>Verb / Operation</td>
-                    <td>Leads to, moves toward, transforms into</td>
-                </tr>
-                <tr>
-                    <td>&cap;</td>
-                    <td>Relation</td>
-                    <td>Intersection, overlap between concepts</td>
+            <tbody id="dictTableBody">
+                <tr class="loading-row">
+                    <td colspan="3">Loading vocabulary database from repository...</td>
                 </tr>
             </tbody>
         </table>
     </main>
 
     <footer>
-        <p>&copy; Matheriel Language Project Team. All rights reserved.</p>
+        <p>&copy; 2026 Matheriel Language Project Team. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript Files Separated -->
     <script src="script.js"></script>
+    <script src="dict.js"></script>
 </body>
 </html>
