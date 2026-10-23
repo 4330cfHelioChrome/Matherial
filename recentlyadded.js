@@ -144,12 +144,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             const loadMoreBtn = document.createElement("button");
             loadMoreBtn.id = "loadMoreBtn";
             loadMoreBtn.textContent = "Load More";
-            loadMoreBtn.className = "load-more-btn"; // 필요시 CSS 스타일링용 클래스
-            loadMoreBtn.style.display = "block";
-            loadMoreBtn.style.margin = "20px auto";
-            loadMoreBtn.style.padding = "10px 20px";
-            loadMoreBtn.style.cursor = "pointer";
-
+            loadMoreBtn.className = "load-more-btn"; // CSS 클래스 활용
+        
             loadMoreBtn.addEventListener("click", renderMoreItems);
             container.appendChild(loadMoreBtn);
         }
