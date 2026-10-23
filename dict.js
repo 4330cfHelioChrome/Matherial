@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let allVocabulary = [];
     let filteredVocabulary = [];
     let displayedCount = 0;
-    const ITEMS_PER_PAGE = 5; // 한 번에 보여줄 개수
+    const ITEMS_PER_PAGE = 20; // 한 번에 보여줄 개수
 
     const tableBody = document.getElementById("dictTableBody");
     const searchInput = document.getElementById("searchInput");
