@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     ];
 
     const container = document.getElementById("recentContainer");
+    
+    // 설정: 한 번에 보여줄 최대 항목 수
+    const ITEMS_PER_PAGE = 20;
+    let allRecentWords = [];
+    let currentIndex = 0;
 
     try {
         // 1. 모든 JSON 파일 비동기 로드
@@ -41,10 +46,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         // 2. 날짜 기준 설정 (현재, 1달 전, 3달 전)
         const now = new Date();
         const oneMonthAgo = new Date();
-        oneMonthAgo.setDate(now.getDate() - 30); // 약 1달 (30일) 기준
+        oneMonthAgo.setDate(now.getDate() - 30);
 
         const threeMonthsAgo = new Date();
-        threeMonthsAgo.setMonth(now.getMonth() - 3); // 3달 기준
+        threeMonthsAgo.setMonth(now.getMonth() - 3);
 
         // 3. 필터링: 3달 이내 데이터만 추출
         const recentWords = allVocabulary.filter(item => {
@@ -61,20 +66,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // 5. 기간별 그룹화 로직 (1달 이내: 일 단위 / 1달~3달: 주 단위)
+        allRecentWords = recentWords;
+        container.innerHTML = ""; // 로딩 텍스트 제거
+
+        // 5. 초기 렌더링 실행 및 더 보기 버튼 생성
+        renderMoreItems();
+
+    } catch (error) {
+        console.error("Error loading recent dictionary data:", error);
+        container.innerHTML = `<p class="error-text">Failed to load recently added entries.</p>`;
+    }
+
+    // 항목을 추가로 렌더링하는 함수 (그룹별 또는 전체 개수 기준 분할)
+    function renderMoreItems() {
+        const nextIndex = currentIndex + ITEMS_PER_PAGE;
+        const currentBatch = allRecentWords.slice(currentIndex, nextIndex);
+        currentIndex = nextIndex;
+
+        // 이번에 불러온 항목들을 기간별(일 단위 / 주 단위)로 그룹화
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setDate(new Date().getDate() - 30);
+
         const groups = {};
-
-        recentWords.forEach(item => {
+        currentBatch.forEach(item => {
             const itemDate = new Date(item.addedDate);
-            let groupKey = "";
-
-            if (itemDate >= oneMonthAgo) {
-                // 1달 이내: 정확한 날짜별로 그룹화 (예: "2026-10-23")
-                groupKey = item.addedDate; 
-            } else {
-                // 1달 이상 ~ 3달 이내: 일주일(주차) 단위로 그룹화
-                groupKey = getWeekRangeString(itemDate);
-            }
+            let groupKey = itemDate >= oneMonthAgo ? item.addedDate : getWeekRangeString(itemDate);
 
             if (!groups[groupKey]) {
                 groups[groupKey] = [];
@@ -82,46 +98,68 @@ document.addEventListener("DOMContentLoaded", async () => {
             groups[groupKey].push(item);
         });
 
-        // 6. HTML 동적 생성 및 렌더링
-        container.innerHTML = ""; // 로딩 텍스트 제거
+        // DOM에 추가
         for (const [groupTitle, words] of Object.entries(groups)) {
-            const sectionHeading = document.createElement("h2");
-            sectionHeading.textContent = groupTitle;
+            // 이미 존재하는 날짜/주차 헤더가 있는지 확인 (중복 방지)
+            let sectionHeading = document.getElementById(`group-${groupTitle}`);
+            let tableBody;
 
-            const table = document.createElement("table");
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>Word</th>
-                        <th>Category</th>
-                        <th>Meaning</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${words.map(w => `
+            if (!sectionHeading) {
+                sectionHeading = document.createElement("h2");
+                sectionHeading.id = `group-${groupTitle}`;
+                sectionHeading.textContent = groupTitle;
+
+                const table = document.createElement("table");
+                table.id = `table-${groupTitle}`;
+                table.innerHTML = `
+                    <thead>
                         <tr>
-                            <td><strong>${escapeHtml(w.word)}</strong></td>
-                            <td><span class="category-badge">${escapeHtml(w.category)}</span></td>
-                            <td>${escapeHtml(w.definition)}</td>
+                            <th>Word</th>
+                            <th>Category</th>
+                            <th>Meaning</th>
                         </tr>
-                    `).join("")}
-                </tbody>
-            `;
+                    </thead>
+                    <tbody></tbody>
+                `;
+                container.appendChild(sectionHeading);
+                container.appendChild(table);
+            }
 
-            container.appendChild(sectionHeading);
-            container.appendChild(table);
+            tableBody = document.querySelector(`#table-${groupTitle} tbody`);
+            tableBody.innerHTML += words.map(w => `
+                <tr>
+                    <td><strong>${escapeHtml(w.word)}</strong></td>
+                    <td><span class="category-badge">${escapeHtml(w.category)}</span></td>
+                    <td>${escapeHtml(w.definition)}</td>
+                </tr>
+            `).join("");
         }
 
-    } catch (error) {
-        console.error("Error loading recent dictionary data:", error);
-        container.innerHTML = `<p class="error-text">Failed to load recently added entries.</p>`;
+        // 기존 "Load More" 버튼 제거 (중복 생성 방지)
+        const existingBtn = document.getElementById("loadMoreBtn");
+        if (existingBtn) existingBtn.remove();
+
+        // 아직 보여줄 데이터가 더 남았다면 "Load More" 버튼 생성
+        if (currentIndex < allRecentWords.length) {
+            const loadMoreBtn = document.createElement("button");
+            loadMoreBtn.id = "loadMoreBtn";
+            loadMoreBtn.textContent = "Load More";
+            loadMoreBtn.className = "load-more-btn"; // 필요시 CSS 스타일링용 클래스
+            loadMoreBtn.style.display = "block";
+            loadMoreBtn.style.margin = "20px auto";
+            loadMoreBtn.style.padding = "10px 20px";
+            loadMoreBtn.style.cursor = "pointer";
+
+            loadMoreBtn.addEventListener("click", renderMoreItems);
+            container.appendChild(loadMoreBtn);
+        }
     }
 
-    // 날짜를 받아 해당 주의 월요일~일요일(또는 시작일~종료일) 문자열을 만들어주는 헬퍼 함수
+    // 주간 범위 계산 헬퍼 함수
     function getWeekRangeString(date) {
         const d = new Date(date);
         const day = d.getDay();
-        const diff = d.getDate() - day + (day === 0 ? -6 : 1); // 해당 주의 월요일 계산
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
         
         const monday = new Date(d.setDate(diff));
         const sunday = new Date(monday);
