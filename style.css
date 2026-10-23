@@ -255,3 +255,21 @@ footer {
     color: var(--text-muted);
     padding: 2.5rem;
 }
+
+/* 🖱️ 모던 스크롤바 디자인 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+}
