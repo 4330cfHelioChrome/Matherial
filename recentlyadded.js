@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("recentContainer");
     
     // 설정: 한 번에 보여줄 최대 항목 수
-    const ITEMS_PER_PAGE = 20;
+    const ITEMS_PER_PAGE = 5;
     let allRecentWords = [];
     let currentIndex = 0;
 
