@@ -109,13 +109,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const loadMoreBtn = document.createElement("button");
             loadMoreBtn.id = "dictLoadMoreBtn";
             loadMoreBtn.textContent = "Load More";
-            loadMoreBtn.style.display = "block";
-            loadMoreBtn.style.margin = "20px auto";
-            loadMoreBtn.style.padding = "10px 20px";
-            loadMoreBtn.style.cursor = "pointer";
-
+            loadMoreBtn.className = "load-more-btn"; // 동일한 CSS 클래스 공유
+        
             loadMoreBtn.addEventListener("click", renderMoreItems);
-            
+        
             // 테이블 바로 아래에 버튼 추가
             tableBody.closest("table").after(loadMoreBtn);
         }
