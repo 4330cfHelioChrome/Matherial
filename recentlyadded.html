@@ -26,25 +26,10 @@
         <h1>Recently Added</h1>
         <p>New entries and symbols added to the Matheriel lexicon, categorized by update date.</p>
 
-        <!-- Date Category: October 2026 -->
-        <h2>October 2026</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Word</th>
-                    <th>Category</th>
-                    <th>Meaning</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>π!</td>
-                    <td>Verb stem</td>
-                    <td>To eat, "먹-" in Korean</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <!-- 동적으로 날짜별 테이블이 생성될 공간 -->
+        <div id="recentContainer">
+            <p class="loading-text">Loading recent entries...</p>
+        </div>
     </main>
 
     <footer>
@@ -52,5 +37,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="recentlyadded.js"></script> <!-- 전용 JS 파일 분리 또는 script 태그 내에 작성 -->
 </body>
 </html>
