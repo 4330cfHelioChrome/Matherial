@@ -1,14 +1,17 @@
 [
   {
     "word": "<",
-    "definition": "Past tense"
+    "definition": "Past tense",
+    "added-date": "2026-10-22"
   },
   {
     "word": ">",
-    "definition": "Future tense"
+    "definition": "Future tense",
+    "added-date": "2026-10-22"
   },
   {
     "word": "≒",
-    "definition": "Present tense"
+    "definition": "Present tense",
+    "added-date": "2026-10-22"
   }
 ]
